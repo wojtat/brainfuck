@@ -1,4 +1,4 @@
-﻿namespace Brainfuck
+﻿namespace Brainfuck.Logic
 {
     /// <summary>
     /// Interprets the code
@@ -22,9 +22,14 @@
 
         #endregion
 
+        /// <summary>
+        /// Interpret the code we have
+        /// </summary>
         public void Interpret()
         {
             char current;
+
+            // While we have a character to interpret
             while ((current = code.Next()) != 0)
             {
                 switch (current)

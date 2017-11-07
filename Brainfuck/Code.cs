@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Brainfuck
+namespace Brainfuck.Logic
 {
     /// <summary>
     /// Represents the Brainfuck code
     /// </summary>
-    public class Code
+    internal class Code
     {
         /// <summary>
         /// The raw code string
@@ -119,11 +119,30 @@ namespace Brainfuck
             return next;
         }
 
+        /// <summary>
+        /// Sets the value of the <see cref="currentPointer"/> to the specified value
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(char value)
         {
-
+            pointers[currentPointer] = value;
         }
 
+        /// <summary>
+        /// Get the value of the <see cref="currentPointer"/>
+        /// </summary>
+        /// <returns></returns>
+        public uint GetValue()
+        {
+            if (!pointers.ContainsKey(currentPointer))
+                return 0;
+            return pointers[currentPointer];
+        }
+
+        /// <summary>
+        /// Adds one to the value at <see cref="currentPointer"/>,
+        /// corresponds to '+'
+        /// </summary>
         public void Increment()
         {
             if (!pointers.ContainsKey(currentPointer))
@@ -134,26 +153,40 @@ namespace Brainfuck
             pointers[currentPointer]++;
         }
 
+        /// <summary>
+        /// Subtracts one from the value at <see cref="currentPointer"/>,
+        /// corresponds to '-'
+        /// </summary>
         public void Decrement()
         {
             if (!pointers.ContainsKey(currentPointer) || pointers[currentPointer] == 0)
-            {
                 throw new InvalidOperationException("Pointers cannot hold values less than zero.");
-            }
 
             pointers[currentPointer]--;
         }
 
+        /// <summary>
+        /// Shifts the <see cref="currentPointer"/> to the left
+        /// (decreases by one), corresponds to '&lt;'
+        /// </summary>
         public void ShiftLeft()
         {
             currentPointer--;
         }
 
+        /// <summary>
+        /// Shifts the <see cref="currentPointer"/> to the right
+        /// (increases by one), corresponds to '&gt;'
+        /// </summary>
         public void ShiftRight()
         {
             currentPointer++;
         }
 
+        /// <summary>
+        /// The string representation of the code object
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return pureText;
