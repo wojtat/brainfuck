@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainfuck.Logic", "Brainfuck\Brainfuck.Logic.csproj", "{18402C3B-12FC-4092-A98B-5CAA913B86CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainfuck.Logic", "Logic\Brainfuck.Logic.csproj", "{18402C3B-12FC-4092-A98B-5CAA913B86CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainfuck.UI", "UI\Brainfuck.UI.csproj", "{0CA6D9EC-C3CF-49A7-9561-13E686DAA7FD}"
 EndProject

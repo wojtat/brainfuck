@@ -50,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Brainfuck\Brainfuck.Logic.csproj">
+    <ProjectReference Include="..\Logic\Brainfuck.Logic.csproj">
       <Project>{18402c3b-12fc-4092-a98b-5caa913b86cb}</Project>
       <Name>Brainfuck.Logic</Name>
     </ProjectReference>

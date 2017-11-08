@@ -26,7 +26,7 @@ namespace Brainfuck.Logic
         int charPointer;
 
         /// <summary>
-        /// The stack that keeps track of the [] loops
+        /// The stack that keeps track of the [] loop starts
         /// </summary>
         Stack<int> loops;
 
@@ -83,7 +83,7 @@ namespace Brainfuck.Logic
         {
             charPointer++;
 
-            if (charPointer == pureText.Length)
+            if (charPointer >= pureText.Length)
                 return (char)0;
 
             char next = pureText[charPointer];
@@ -93,9 +93,36 @@ namespace Brainfuck.Logic
             {
                 // Begining of a loop
                 
-                loops.Push(charPointer);
+                if (GetValue() != 0)
+                {
+                    loops.Push(charPointer);
+                    return Next();
+                }
+
+                // We want to skip to the end of the loop because the value is zero
+                int inLoopPointer = 0;
+                int loopLevel = 1;
+
+                while (loopLevel != 0)
+                {
+                    switch (pureText[currentPointer + ++inLoopPointer])
+                    {
+                        case '[':
+                            loopLevel++;
+                            break;
+                        case ']':
+                            loopLevel--;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                }
+                charPointer += inLoopPointer;
 
                 return Next();
+
             }
             else if (next == ']')
             {
