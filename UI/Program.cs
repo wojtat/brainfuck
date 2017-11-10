@@ -25,17 +25,52 @@ namespace Brainfuck.UI
             };
 
             // The actual code string to be interpreted
-            string code;
+            string code = null;
 
-            // Request the path to the text file of the code
-            Console.WriteLine("Specify the path to the code text file:");
-            string path = Console.ReadLine();
-            code = File.ReadAllText(path);
+            if (args == null || args.Length < 1)
+            {
+                // Request the path to the text file of the code
+                Console.WriteLine("Specify the path to the code text file:");
+                string path = Console.ReadLine();
+                
+                while (!TryReadText(path, ref code))
+                {
+                    Console.WriteLine("Invalid path! Specify the path to the code text file:");
+                    path = Console.ReadLine();
+                }
+            }
+            else
+            {
+                // Use the path provided as a command line argument
+                bool success = TryReadText(args[0], ref code);
 
+                // Terminate the application if the file isn't valid
+                if (!success) return;
+            }
+
+            Console.Clear();
+
+            // Interpret the code
             Interpreter i = new Interpreter(code, getUserInput, display);
             i.Interpret();
-
+            
+            // Wait for the user to terminate
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey(true);
+        }
+        
+        /// <summary>
+        /// Determine whether the path leads to a valid .txt file,
+        /// if so, read from it
+        /// </summary>
+        static bool TryReadText(string path, ref string text)
+        {
+            if (File.Exists(path) && path.EndsWith(".txt"))
+            {
+                text = File.ReadAllText(path);
+                return true;
+            }
+            return false;
         }
     }
 }
